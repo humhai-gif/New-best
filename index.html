@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Durga Puja Special ✨</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;font-family:Arial,sans-serif;color:#fff;overflow-x:hidden}
+.page{min-height:100vh;display:none;align-items:center;justify-content:center;text-align:center;padding:20px}
+
+#welcomePage{display:flex;background:radial-gradient(circle at 50% 40%,#243b7a,#10152e 45%,#050611)}
+.welcome{font-size:clamp(48px,14vw,110px);font-weight:900;letter-spacing:10px;text-shadow:0 0 20px #fff,0 0 50px #5896ff;animation:glow 2s infinite alternate}
+.subtitle{margin-top:18px;font-size:20px;opacity:.85}
+
+button{padding:15px 30px;border:0;border-radius:50px;font-size:17px;font-weight:bold;cursor:pointer}
+.enterBtn{margin-top:25px;background:#ffffff22;color:#fff;border:1px solid #ffffff88}
+
+#mysteryPage{background:radial-gradient(circle,#7b214d,#210817 65%,#08030a)}
+.mysteryCard{width:100%;max-width:430px;padding:30px 20px;border-radius:28px;background:#ffffff14;border:1px solid #ffffff30;box-shadow:0 0 50px #ffbe3c30}
+.diya{font-size:55px}
+.mysteryCard h1{margin:10px 0}
+.mysterySub{opacity:.8;margin-bottom:25px}
+
+.giftBox{position:relative;width:220px;height:220px;margin:20px auto;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(145deg,#d62828,#7b1025);border:4px solid #e9bd3f;cursor:pointer;animation:giftFloat 2s infinite ease-in-out}
+.giftEmoji{font-size:75px}
+.giftText{margin-top:12px;font-size:13px;font-weight:bold;letter-spacing:2px}
+.giftGlow{position:absolute;inset:-15px;border-radius:35px;border:2px solid #ffd75055;animation:ringPulse 1.5s infinite}
+#giftResult{min-height:35px;margin-top:20px;font-size:21px;font-weight:bold}
+
+#vipPage{background:linear-gradient(135deg,#ff512f,#dd2476)}
+.card{width:100%;max-width:420px;background:#000c;padding:28px;border-radius:22px;text-align:center;box-shadow:0 0 35px #fff3}
+.card h1{margin:10px 0}
+.card input,.card select,.card button{width:100%;margin:8px 0}
+.card input,.card select{padding:14px;border:0;border-radius:10px;font-size:16px}
+.generate{background:#ffcc00;color:#111}
+
+#scanScreen{display:none;position:fixed;inset:0;z-index:9999;background:#050505;color:#00ff66;padding:25px;font-family:monospace;overflow:hidden}
+#terminal{max-width:700px;margin:15vh auto 0;font-size:17px;line-height:1.8}
+.progress{margin-top:20px;width:100%;height:12px;border:1px solid #00ff66}
+.progressBar{width:0;height:100%;background:#00ff66;transition:width .5s}
+.warning{color:#ff4444;font-size:28px;font-weight:bold;text-align:center;animation:blink .4s infinite alternate}
+
+#surprise{display:none;position:fixed;inset:0;z-index:10000;background:linear-gradient(135deg,#ff512f,#f09819);align-items:center;justify-content:center;padding:20px}
+.pass{width:100%;max-width:400px;background:#fff;color:#222;border-radius:25px;padding:30px;text-align:center;box-shadow:0 0 40px #fff9}
+.pass h1{color:#e63946;margin:10px 0}
+.pass .emoji{font-size:60px}
+.pass p{margin:10px 0}
+.nextBtn{width:100%;background:#e63946;color:#fff;margin-top:18px}
+.small{color:#666;font-size:13px}
+
+#shopPage{display:none;align-items:flex-start;justify-content:flex-start;text-align:left;background:#f7f7f9;color:#222;padding:0;min-height:100vh}
+.shopHeader{position:sticky;top:0;z-index:5;width:100%;background:#fff;padding:16px 18px;box-shadow:0 2px 12px #0001}
+.shopLogo{font-size:24px;font-weight:900;color:#e63946}
+.shopContent{width:100%;max-width:1000px;margin:auto;padding:22px 16px}
+.hero{background:linear-gradient(135deg,#e63946,#f4a261);color:#fff;border-radius:20px;padding:24px;margin-bottom:22px}
+.hero h1{font-size:30px;margin-bottom:8px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.product{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 3px 14px #00000012}
+.prodImg{width:100%;height:220px;object-fit:cover;display:block}
+.prodInfo{padding:14px}
+.prodInfo h3{font-size:16px;margin-bottom:6px}
+.price{font-weight:800;color:#e63946;font-size:19px}
+.add{width:100%;margin-top:10px;padding:10px;background:#222;color:#fff;font-size:14px}
+
+#deliveryPage{display:none;position:fixed;inset:0;z-index:11000;background:linear-gradient(135deg,#fff7e6,#ffe0b2);color:#222;align-items:center;justify-content:center;padding:20px;text-align:center}
+.deliveryCard{width:100%;max-width:420px;background:#fff;border-radius:24px;padding:30px 22px;box-shadow:0 12px 40px rgba(0,0,0,.15)}
+.deliveryIcon{font-size:65px}
+.deliveryCard h1{color:#e63946;margin:8px 0 12px}
+.deliveryDays{font-size:32px;font-weight:900;margin:18px 0}
+.deliveryBlessing{font-size:22px;font-weight:bold;color:#e63946;margin:18px 0}
+.deliveryNote{color:#666;font-size:14px}
+.backShop{width:100%;margin-top:20px;background:#222;color:#fff}
+
+@keyframes glow{from{filter:brightness(1)}to{filter:brightness(1.5)}}
+@keyframes giftFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes ringPulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.15);opacity:0}}
+@keyframes blink{from{opacity:.3}to{opacity:1}}
+
+@media(min-width:650px){
+.products{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+
+<body>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="background-music.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="generateSound" preload="auto">
+  <source src="Standard recording 31.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="hackMusic" loop preload="auto">
+  <source src="hacker-music.mp3" type="audio/mpeg">
+</audio>
+
+
+<!-- WELCOME -->
+<section id="welcomePage" class="page">
+  <div>
+    <div class="welcome">WELCOME</div>
+    <div class="subtitle">✨ Welcome to my page ✨</div>
+    <button class="enterBtn" onclick="enterPage()">ENTER</button>
+  </div>
+</section>
+
+
+<!-- MYSTERY -->
+<section id="mysteryPage" class="page">
+  <div class="mysteryCard">
+    <div class="diya">🪔</div>
+    <h1>Durga Puja Special</h1>
+    <p class="mysterySub">A special surprise is waiting for you...</p>
+
+    <div class="giftBox" id="giftBox" onclick="revealGift()">
+      <div class="giftGlow"></div>
+      <div class="giftEmoji">🎁</div>
+      <div class="giftText">TAP TO REVEAL</div>
+    </div>
+
+    <div id="giftResult"></div>
+  </div>
+</section>
+
+
+<!-- VIP -->
+<section id="vipPage" class="page">
+  <div class="card">
+
+    <div style="font-size:55px">🪔</div>
+
+    <h1>Durga Puja VIP Pass</h1>
+    <p>Create your special Puja pass 🎉</p>
+
+    <input id="name" maxlength="30" placeholder="Enter your name">
+
+    <select id="category">
+      <option>Maha Saptami</option>
+      <option>Maha Ashtami</option>
+      <option>Maha Navami</option>
+      <option>Vijaya Dashami</option>
+    </select>
+
+    <select id="dress">
+      <option>Traditional</option>
+      <option>Kurta / Panjabi</option>
+      <option>Saree</option>
+      <option>Casual</option>
+    </select>
+
+    <button class="generate" onclick="generatePass()">
+      🎟️ Generate VIP Pass
+    </button>
+
+  </div>
+</section>
+
+
+<!-- VISUAL-ONLY SCAN -->
+<div id="scanScreen">
+  <div id="terminal"></div>
+
+  <div class="progress">
+    <div class="progressBar" id="progressBar"></div>
+  </div>
+</div>
+
+
+<!-- SURPRISE -->
+<div id="surprise">
+  <div class="pass">
+
+    <div class="emoji">🎉</div>
+
+    <h1>SURPRISE!</h1>
+
+    <h2>Durga Puja VIP Pass</h2>
+
+    <p><b>Name:</b> <span id="passName"></span></p>
+    <p><b>Puja:</b> <span id="passCategory"></span></p>
+    <p><b>Dress:</b> <span id="passDress"></span></p>
+
+    <hr>
+
+    <p>🪔 শুভ দুর্গাপূজা 🪔</p>
+
+    <p class="small">This was only a visual prank 😄</p>
+
+    <button class="nextBtn" onclick="nextPage()">
+      Next ➜
+    </button>
+
+  </div>
+</div>
+
+
+<!-- SHOP -->
+<section id="shopPage">
+
+  <header class="shopHeader">
+    <div class="shopLogo">🛍️ Puja Mart</div>
+  </header>
+
+  <div class="shopContent">
+
+    <div class="hero">
+      <h1>Durga Puja Shopping 🎉</h1>
+      <p>Festival products</p>
+    </div>
+
+    <div class="products" id="products"></div>
+
+  </div>
+</section>
+
+
+<!-- DELIVERY -->
+<div id="deliveryPage">
+
+  <div class="deliveryCard">
+
+    <div class="deliveryIcon">📦</div>
+
+    <h1>Order Confirmed!</h1>
+
+    <p>Your order has been placed successfully.</p>
+
+    <div class="deliveryDays">
+      🚚 5 Days to Deliver
+    </div>
+
+    <div class="deliveryBlessing">
+      🙏 Maa Durga Blessed Him 🙏
+    </div>
+
+    <p class="deliveryNote">
+      Estimated delivery: within 5 days.
+    </p>
+
+    <button class="backShop" onclick="backToShop()">
+      Next ➜
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+let giftOpened=false;
+
+
+/* PRODUCTS */
+const products=[
+  {
+    name:"Product 1",
+    price:499,
+    image:"9292.jpg"
+  },
+  {
+    name:"Product 2",
+    price:799,
+    image:"9293.jpg"
+  },
+  {
+    name:"Product 3",
+    price:999,
+    image:"9294.jpg"
+  }
+];
+
+
+/* PAGE CONTROL */
+function show(id){
+
+  document
+    .querySelectorAll('.page,#surprise,#scanScreen,#shopPage')
+    .forEach(x=>{
+      if(x.id!=="scanScreen"){
+        x.style.display="none";
+      }
+    });
+
+  document.getElementById(id).style.display =
+    id==="shopPage" ? "block" : "flex";
+}
+
+
+/* ENTER */
+function enterPage(){
+
+  show("mysteryPage");
+
+  const bgMusic=document.getElementById("bgMusic");
+
+  bgMusic.volume=0.25;
+  bgMusic.currentTime=0;
+
+  bgMusic.play().catch(()=>{});
+}
+
+
+/* MYSTERY GIFT */
+function revealGift(){
+
+  if(giftOpened)return;
+
+  giftOpened=true;
+
+  const box=document.getElementById("giftBox");
+
+  document.getElementById("giftResult").textContent=
+    "✨ Opening your special Puja surprise...";
+
+  if(navigator.vibrate){
+    navigator.vibrate([100,80,100]);
+  }
+
+  box.style.animation="none";
+
+  setTimeout(()=>{
+
+    box.innerHTML=
+      '<div style="font-size:70px">🪔</div>'+
+      '<div style="font-size:13px;margin-top:10px;font-weight:bold">'+
+      'SPECIAL ENTRY UNLOCKED</div>';
+
+    document.getElementById("giftResult").textContent=
+      "🎟️ Your VIP Puja Pass is ready!";
+
+  },1800);
+
+  setTimeout(()=>{
+    show("vipPage");
+  },3500);
+}
+
+
+/* VIBRATION */
+function vibrate(){
+
+  if(navigator.vibrate){
+    navigator.vibrate([
+      250,120,250,120,250
+    ]);
+  }
+}
+
+
+/* GENERATE */
+function generatePass(){
+
+  const input=document.getElementById("name").value.trim();
+
+  if(!input){
+    alert("Please enter your name first!");
+    return;
+  }
+
+  document.getElementById("passName").textContent=input;
+
+  document.getElementById("passCategory").textContent=
+    document.getElementById("category").value;
+
+  document.getElementById("passDress").textContent=
+    document.getElementById("dress").value;
+
+
+  /* NORMAL MUSIC OFF */
+  const bgMusic=document.getElementById("bgMusic");
+  bgMusic.pause();
+
+
+  /* GENERATE SOUND */
+  const generateSound=
+    document.getElementById("generateSound");
+
+  generateSound.currentTime=0;
+  generateSound.play().catch(()=>{});
+
+
+  /* VIBRATION */
+  vibrate();
+
+
+  /* HACKER MUSIC */
+  const hackMusic=document.getElementById("hackMusic");
+
+  hackMusic.currentTime=0;
+  hackMusic.volume=0.35;
+  hackMusic.play().catch(()=>{});
+
+
+  /* SCAN */
+  document.getElementById("vipPage").style.display="none";
+  document.getElementById("scanScreen").style.display="block";
+
+  const terminal=document.getElementById("terminal");
+  const progressBar=document.getElementById("progressBar");
+
+  terminal.innerHTML="";
+  progressBar.style.width="0";
+
+
+  const messages=[
+    "Preparing your Puja VIP experience...",
+    "Checking selected Puja...",
+    "Checking dress choice...",
+    "Creating your special pass...",
+    "Adding festival effects...",
+    "Almost ready...",
+    "Preparing the surprise..."
+  ];
+
+
+  let i=0;
+
+
+  function step(){
+
+    if(i<messages.length){
+
+      terminal.innerHTML+=
+        "<div>> "+messages[i]+"</div>";
+
+      progressBar.style.width=
+        Math.round(((i+1)/messages.length)*100)+"%";
+
+      i++;
+
+      setTimeout(step,900);
+
+    }else{
+
+      terminal.innerHTML+=
+        '<div class="warning">SPECIAL EFFECT COMPLETE</div>';
+
+      setTimeout(()=>{
+
+        /* HACKER MUSIC OFF */
+        hackMusic.pause();
+        hackMusic.currentTime=0;
+
+        document.getElementById("scanScreen").style.display="none";
+
+        document.getElementById("surprise").style.display="flex";
+
+        /* BACKGROUND MUSIC ON */
+        bgMusic.currentTime=0;
+        bgMusic.play().catch(()=>{});
+
+      },1400);
+    }
+  }
+
+  step();
+}
+
+
+/* NEXT → SHOP */
+function nextPage(){
+
+  document.getElementById("surprise").style.display="none";
+
+  show("shopPage");
+
+  renderProducts();
+}
+
+
+/* RENDER PRODUCTS */
+function renderProducts(){
+
+  const box=document.getElementById("products");
+
+  box.innerHTML="";
+
+  products.forEach(p=>{
+
+    box.innerHTML+=`
+
+      <article class="product">
+
+        <img
+          class="prodImg"
+          src="${p.image}"
+          alt="${p.name}"
+        >
+
+        <div class="prodInfo">
+
+          <h3>${p.name}</h3>
+
+          <div class="price">
+            ₹${p.price}
+          </div>
+
+          <button
+            class="add"
+            onclick="orderProduct()">
+            Order Now
+          </button>
+
+        </div>
+
+      </article>
+
+    `;
+  });
+}
+
+
+/* ORDER */
+function orderProduct(){
+
+  document.getElementById("shopPage").style.display="none";
+
+  document.getElementById("deliveryPage").style.display="flex";
+}
+
+
+/* NEXT FROM DELIVERY */
+function backToShop(){
+
+  document.getElementById("deliveryPage").style.display="none";
+
+  document.getElementById("shopPage").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
